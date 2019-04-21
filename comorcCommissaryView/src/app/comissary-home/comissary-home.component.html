@@ -1,0 +1,87 @@
+<div class="backgroundDiv">
+  <button class="doNotPrint" mat-raised-button (click)="routeToItems()">View/Edit Items</button>
+  <button class="doNotPrint" mat-raised-button (click)="routeToOrders()">View Orders</button>
+  <button class="doNotPrint" mat-raised-button (click)="routeToAccounts()">Add Accounts</button>
+  
+  <div class="bottomDiv">
+    <div class="bottomLeftDiv">
+      <div class="metadataDiv">
+        <p>Invoice Id : {{invoiceId}} <button mat-raised-button class="doNotPrint" id="printButton" (click)="printStart()">Print</button></p>      
+        <p>Account Name : {{accountName}}</p>
+        <p>Account Address : {{accountAddress}}</p>
+        <p>Order Date/Time : {{creationTime}}</p>
+      </div>
+  
+      <mat-table class="itemTable" [dataSource]="itemSource" *ngIf="getDone">
+        <ng-container  matColumnDef="Item Name">
+        <mat-header-cell *matHeaderCellDef>Item Name</mat-header-cell>
+        <mat-cell *matCellDef="let item">  
+          <span>{{item.name}}</span>
+        </mat-cell>
+        </ng-container>
+  
+        <ng-container  matColumnDef="Unit Cost">
+        <mat-header-cell *matHeaderCellDef>Unit Cost</mat-header-cell>
+        <mat-cell *matCellDef="let item">  
+          $<span>{{item.pricePerUnit.toFixed(2)}}</span>
+        </mat-cell>
+        </ng-container>
+  
+        <ng-container  matColumnDef="Number">
+        <mat-header-cell *matHeaderCellDef>Number</mat-header-cell>
+        <mat-cell *matCellDef="let item">
+          <span>{{item.numberOfItems}}</span>
+        </mat-cell>
+        </ng-container>
+  
+        <ng-container  matColumnDef="Volume Cost">
+        <mat-header-cell *matHeaderCellDef>Volume Cost</mat-header-cell>
+        <mat-cell *matCellDef="let item">
+          $<span>{{item.priceForGroup.toFixed(2)}}</span>
+        </mat-cell>
+        </ng-container>
+        
+        <mat-header-row *matHeaderRowDef="keys"></mat-header-row>
+        <mat-row *matRowDef="let myRowData; columns: keys;"></mat-row>
+      </mat-table>
+      <div class="totalCostDiv">
+        <p>Total Cost: ${{totalCost.toFixed(2)}}</p>
+      </div>
+    </div>
+    <div class="bottomRightDiv doNotPrint">
+      <mat-table class="accountTable" [dataSource]="orderSource" *ngIf="getDone">
+        <ng-container  matColumnDef="Invoice Id">
+          <mat-header-cell *matHeaderCellDef>Invoice Id</mat-header-cell>
+          <mat-cell *matCellDef="let order">  
+          <span>{{order.invoiceId}}</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container  matColumnDef="Cost">
+        <mat-header-cell *matHeaderCellDef>Cost</mat-header-cell>
+        <mat-cell *matCellDef="let order">  
+          $<span>{{order.cost}}</span>
+        </mat-cell>
+        </ng-container>
+
+        <ng-container  matColumnDef="Creation Time">
+        <mat-header-cell *matHeaderCellDef>Creation Time</mat-header-cell>
+        <mat-cell *matCellDef="let order">
+          <span>{{order.creationTime}}</span>
+        </mat-cell>
+        </ng-container>
+
+        <ng-container  matColumnDef="View">
+        <mat-header-cell *matHeaderCellDef>View</mat-header-cell>
+        <mat-cell *matCellDef="let order">  
+          <button id="grey" mat-raised-button (click)="editView(order)">View</button>
+        </mat-cell>
+        </ng-container>
+        
+        <mat-header-row *matHeaderRowDef="keysO"></mat-header-row>
+        <mat-row *matRowDef="let myRowData; columns: keysO;"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+  
+</div>

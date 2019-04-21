@@ -1,0 +1,26 @@
+<div class="backgroundDiv">
+  <div class="topDiv">
+    <button mat-raised-button id="grey"(click)="back()">Back</button>
+  </div>
+  <div class="centerDiv">
+    <div class="accountDiv" *ngFor="let account of accounts; let i=index">
+      <p> Account Name: 
+        <input (keyup)="changeAccountName($event,account)" type="text">
+      </p>
+      <p> Address: 
+        <input (keyup)="changeAddress($event,account)" type="text">
+      </p>
+      <p> Username: 
+        <input (keyup)="changeUsername($event,account)" type="text">
+      </p>
+      <p> Password: 
+        <input (keyup)="changePassword($event,account)" type="text">
+      </p>
+      <!--<button *ngIf="i<items.length-1">Plus</button>
+      <button *ngIf="items.length>1">Minus</button>-->
+    </div>
+    <div class="buttonDiv">
+      <button (click)="submit()" mat-raised-button id="grey">Submit</button>
+    </div>
+  </div>
+</div>

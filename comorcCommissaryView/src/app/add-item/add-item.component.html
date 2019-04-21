@@ -1,0 +1,23 @@
+<div class="backgroundDiv">
+  <div class="topDiv">
+    <button mat-raised-button id="grey"(click)="back()">Back</button>
+  </div>
+  <div class="centerDiv">
+    <div class="itemDiv" *ngFor="let item of items; let i=index">
+      <p> Name: 
+        <input (keyup)="changeName($event,item)" type="text">
+      </p>
+      <p> Price: $
+        <input (keyup)="changePrice($event,item)" type="text">
+      </p>
+      <p> Unit: 
+        <input (keyup)="changeUnit($event,item)" type="text">
+      </p>
+      <!--<button *ngIf="i<items.length-1">Plus</button>
+      <button *ngIf="items.length>1">Minus</button>-->
+    </div>
+    <div class="buttonDiv">
+      <button (click)="submit()" mat-raised-button id="grey">Submit</button>
+    </div>
+  </div>
+</div>

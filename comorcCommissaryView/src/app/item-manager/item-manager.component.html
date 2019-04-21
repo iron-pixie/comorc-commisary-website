@@ -1,0 +1,38 @@
+<div class="backgroundDiv">
+  <div class="topDiv">
+    <button mat-raised-button id="grey-space"(click)="back()">Back</button>
+    <button mat-raised-button id="grey" (click)="navigateAdd()">Add</button>
+  </div>
+  <mat-table class="itemTable" [dataSource]="itemSource" *ngIf="getDone">
+      <ng-container  matColumnDef="Name">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef="let item">  
+            <span>{{item.name}}</span>
+          </mat-cell>
+        </ng-container>
+
+      <ng-container  matColumnDef="Unit">
+        <mat-header-cell *matHeaderCellDef>Unit</mat-header-cell>
+        <mat-cell *matCellDef="let item">  
+          <span>{{item.unit}}</span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container  matColumnDef="Price">
+        <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+        <mat-cell *matCellDef="let item">
+          $<span>{{item.price}}</span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container  matColumnDef="Delete">
+          <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+          <mat-cell *matCellDef="let item">  
+            <button id="grey" mat-raised-button (click)="deleteRow(item)">delete</button>
+          </mat-cell>
+        </ng-container>
+      
+      <mat-header-row *matHeaderRowDef="columnNames"></mat-header-row>
+      <mat-row *matRowDef="let myRowData; columns: columnNames;"></mat-row>
+    </mat-table>
+</div>
