@@ -17,6 +17,8 @@
     outline-color: black;
     outline-style: ridge;
     outline-width: 1%;
+    overflow: auto;
+    max-height: 500px;
 }
 
 #grey{

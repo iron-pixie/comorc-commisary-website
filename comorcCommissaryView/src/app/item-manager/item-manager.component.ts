@@ -17,9 +17,9 @@ export class ItemManagerComponent implements OnInit {
   getDone=false;
   columnNames=["Name","Unit","Price","Delete"];
   itemSource;
-
+  itemArray=[];
   constructor(private location:Location, private http:Http,private router:Router, private httpC:HttpClient) {
-    let itemArray=[];
+
 
     http.get('http://comorcbackend.us-west-2.elasticbeanstalk.com/item/all')
       .subscribe(response => {
@@ -30,7 +30,7 @@ export class ItemManagerComponent implements OnInit {
         response=null;
 
         for(let data of dataResponse){
-          itemArray.push(
+          this.itemArray.push(
             new Item(
               data.itemName,
               data.unit,
@@ -38,7 +38,7 @@ export class ItemManagerComponent implements OnInit {
             )
           )
         }
-        this.itemSource = new MatTableDataSource(itemArray);
+        this.itemSource = new MatTableDataSource(this.itemArray);
         this.getDone=true;
       })
     
@@ -56,15 +56,20 @@ export class ItemManagerComponent implements OnInit {
 
     let headersVar = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
 
-    this.httpC.post('http://comorcbackend.us-west-2.elasticbeanstalk.com/item/delete',jsonItem,{headers: headersVar})
+    this.httpC.post('http://comorcbackend.us-west-2.elasticbeanstalk.com/item/delete',jsonItem,{headers: headersVar, responseType: "text"})
       .subscribe((val) => {
         /*if(val!=null){
           this.back();
         }*/
-        this.itemSource.delete(item);
+        this.itemArray.splice(this.itemArray.indexOf(item), 1);
+        this.itemSource= new MatTableDataSource(this.itemArray);
+
+
         console.log(val);
-        this.back();
+
       });
+
+
   }
 
   back(){
