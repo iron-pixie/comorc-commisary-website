@@ -44,8 +44,8 @@ export class ComissaryHomeComponent implements OnInit {
         this.creationTime=innerArray[0].creationTime;
         this.totalCost=parseFloat(innerArray[0].cost);
 
-        for(let dat of innerArray.splice(1,innerArray.length)){
-          itemArray.push(new Item(dat.itemName,dat.itemCost,dat.itemUnit,dat.itemNumber))
+        for(let i=1;i<innerArray.length;i++){
+          itemArray.push(new Item(innerArray[i].itemName,innerArray[i].itemCost,innerArray[i].itemUnit,innerArray[i].itemNumber))
         }
 
         this.itemSource = new MatTableDataSource(itemArray);
@@ -94,12 +94,13 @@ export class ComissaryHomeComponent implements OnInit {
         this.creationTime=innerArray[0].creationTime;
         this.totalCost=parseFloat(innerArray[0].cost);
 
-        for(let dat of innerArray.splice(1,innerArray.length)){
-          itemArray.push(new Item(dat.itemName,dat.itemCost,dat.itemUnit,dat.itemNumber))
+        for(let i=1;i<innerArray.length;i++){
+          itemArray.push(new Item(innerArray[i].itemName,innerArray[i].itemCost,innerArray[i].itemUnit,innerArray[i].itemNumber))
         }
-
         this.itemSource = new MatTableDataSource(itemArray);
+
       }
+
     }
     this.getDone=true;
   }
